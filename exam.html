@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <link rel="stylesheet" href="css/exam.css">
+</head>
+
+<body onload="initExam()">
+
+    <!-- HEADER -->
+    <header class="topbar">
+        <div class="brand">
+            <img src="images/schoolLogo.jpg">
+            <div>
+                <h2>BRIGHT FUTURE SCHOOL</h2>
+                <p>First Terminal MCQ Examination</p>
+            </div>
+        </div>
+
+        <div id="timer">30:00</div>
+    </header>
+
+    <!-- MAIN -->
+    <div class="main">
+
+        <!-- LEFT SIDEBAR (QUESTION NAVIGATION) -->
+        <div class="sidebar" id="nav"></div>
+
+        <!-- QUESTIONS AREA -->
+        <div class="content">
+            <div id="questions"></div>
+            <button onclick="submitExam()">Submit Exam</button>
+        </div>
+
+    </div>
+
+    <script src="script/questions.js"></script>
+    <script src="script/script.js"></script>
+
+</body>
+
+</html>

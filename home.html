@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>Home - Exam System</title>
+  <link rel="stylesheet" href="css/home.css">
+</head>
+
+<body>
+
+  <!-- TOP BAR -->
+  <header class="topbar">
+    <div class="left-brand">
+      <img src="images/schoolLogo.jpg" alt="Logo">
+      <div>
+        <h1>BRIGHT FUTURE SCHOOL</h1>
+        <p>Satdobato, Lalitpur, Nepal</p>
+      </div>
+    </div>
+
+    <div class="right-info">
+      First Terminal MCQ Assessment
+    </div>
+  </header>
+
+  <!-- MAIN CONTENT -->
+  <div class="main">
+
+    <!-- LEFT -->
+    <div class="welcome">
+      <h2>👋 Welcome, <span id="student"></span></h2>
+
+      <p>
+        You are logged into the official <b>Online Examination System</b>.
+        Please read instructions carefully before starting the exam.
+      </p>
+
+      <div class="time-box">
+        🕓 Exam Time: 4:50 PM (Nepal Time)
+      </div>
+
+      <button onclick="startExam()">Start Assessment</button>
+    </div>
+
+    <!-- RIGHT -->
+    <div class="exam-box">
+      <img src="images/mcqlogo.webp" alt="Exam Logo">
+
+      <h3>Online MCQ Exam Portal</h3>
+      <p>Click below to begin your assessment</p>
+    </div>
+
+  </div>
+
+  <!-- FOOTER -->
+  <footer>
+    © 2026 BRIGHT FUTURE SCHOOL | All Rights Reserved
+  </footer>
+
+  <script>
+    document.getElementById("student").innerText = localStorage.getItem("student");
+
+    function startExam() {
+      window.location = "instructions.html";
+    }
+  </script>
+
+</body>
+
+</html>

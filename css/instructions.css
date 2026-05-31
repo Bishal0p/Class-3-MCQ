@@ -1,0 +1,183 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Segoe UI', sans-serif;
+}
+
+/* BODY */
+body {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  background: linear-gradient(135deg, #e3edf7, #ffffff);
+}
+
+/* HEADER */
+.topbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 12px 25px;
+  background: #1e3c72;
+  color: white;
+}
+
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.brand img {
+  width: 70px;
+  height: 70px;
+  border-radius: 50%;
+  background: white;
+  padding: 4px;
+}
+
+.brand h1 {
+  font-size: 16px;
+}
+
+.brand p {
+  font-size: 11px;
+  opacity: 0.8;
+}
+
+.title {
+  font-weight: bold;
+  color: #00c6ff;
+}
+
+/* MAIN */
+.main {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 60px;
+  padding: 20px;
+}
+
+/* CARD */
+.container {
+  width: 650px;
+  background: white;
+  padding: 30px;
+  border-radius: 18px;
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.15);
+}
+
+/* HEADER TEXT */
+.card-header {
+  text-align: center;
+  margin-bottom: 15px;
+}
+
+.card-header h2 {
+  color: #1e3c72;
+}
+
+.card-header p {
+  font-size: 13px;
+  color: #666;
+}
+
+/* RULE BOX */
+.rules-box {
+  padding: 18px;
+  border-radius: 12px;
+  margin-top: 18px;
+  transition: 0.3s;
+}
+
+.do {
+  background: #e8f5e9;
+  border-left: 6px solid #28a745;
+}
+
+.dont {
+  background: #fdecea;
+  border-left: 6px solid #dc3545;
+}
+
+.rules-box ul {
+  margin-top: 10px;
+  padding-left: 18px;
+}
+
+.rules-box li {
+  margin-bottom: 6px;
+  font-size: 14px;
+}
+
+/* HOVER */
+.rules-box:hover {
+  transform: scale(1.02);
+}
+
+/* WARNING */
+.warning-box {
+  margin-top: 18px;
+  padding: 12px;
+  background: #fff3cd;
+  border-left: 6px solid #ffc107;
+  border-radius: 10px;
+  font-size: 13px;
+  text-align: center;
+}
+
+/* CHECKBOX */
+.agree-box {
+  margin: 18px 0;
+  display: flex;
+  gap: 8px;
+  font-size: 14px;
+}
+
+/* BUTTON */
+button {
+  width: 100%;
+  padding: 15px;
+  background: linear-gradient(45deg, #28a745, #43e97b);
+  border: none;
+  border-radius: 10px;
+  color: white;
+  font-size: 16px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+button:hover {
+  transform: scale(1.05);
+}
+
+/* IMAGE */
+.image-box {
+  width: 380px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.image-box img {
+  width: 420px;
+  height: 420px;
+  object-fit: contain;
+  transition: 0.3s;
+}
+
+.image-box:hover img {
+  transform: scale(1.1) rotate(3deg);
+}
+
+/* FOOTER */
+footer {
+  text-align: center;
+  padding: 12px;
+  background: #1e3c72;
+  color: white;
+  font-size: 13px;
+}

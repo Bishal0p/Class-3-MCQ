@@ -1,0 +1,188 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Segoe UI', sans-serif;
+}
+
+/* BODY */
+body {
+  background: #eef2f7;
+}
+
+/* HEADER */
+.topbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 20px;
+  background: #1e3c72;
+  color: white;
+}
+
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.brand img {
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  background: white;
+  padding: 3px;
+}
+
+.brand h2 {
+  font-size: 18px;
+}
+
+.brand p {
+  font-size: 12px;
+  opacity: 0.8;
+}
+
+/* TIMER */
+#timer {
+  background: #ff4d4d;
+  padding: 10px 20px;
+  border-radius: 8px;
+  font-weight: bold;
+}
+
+/* MAIN LAYOUT */
+.main {
+  display: flex;
+  height: calc(100vh - 80px);
+}
+
+/* 🔥 SIDEBAR (3 COLUMN GRID) */
+/* SIDEBAR */
+.sidebar {
+  width: 260px;
+  background: white;
+  padding: 15px 10px 15px 15px;
+  /* 🔥 right padding smaller to avoid scroll touch */
+
+  border-right: 1px solid #ddd;
+
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+
+  row-gap: 12px;
+  /* 🔥 vertical gap only */
+  column-gap: 0px;
+  /* 🔥 remove horizontal gap */
+
+  overflow-y: auto;
+  align-content: start;
+}
+
+/* BUTTON */
+.q-btn {
+  width: 90%;
+  /* 🔥 reduce width to avoid touching scrollbar */
+  height: 45px;
+  margin: auto;
+  /* 🔥 center inside grid cell */
+
+  border: none;
+  border-radius: 8px;
+  background: linear-gradient(135deg, #667eea, #764ba2);
+  cursor: pointer;
+  font-weight: bold;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  transition: 0.2s;
+}
+
+/* hover */
+.q-btn:hover {
+  background: #007bff;
+  color: white;
+}
+
+/* active question */
+.q-btn.active {
+  background: #ff9800;
+  color: white;
+}
+
+/* CONTENT */
+.content {
+  flex: 1;
+  padding: 30px;
+  overflow-y: auto;
+}
+
+/* QUESTION BOX */
+.q-box {
+  margin-bottom: 20px;
+  padding: 20px;
+  border-radius: 12px;
+  border: 1px solid #eee;
+  background: white;
+  transition: 0.3s;
+}
+
+.q-box:hover {
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+}
+
+/* QUESTION TEXT */
+.q-box p {
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+
+/* OPTIONS */
+label {
+  display: block;
+  margin: 8px 0;
+  padding: 10px;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+/* hover */
+label:hover {
+  background: #f1f5ff;
+}
+
+/* selected */
+input[type="radio"]:checked+span {
+  font-weight: bold;
+  color: #1e3c72;
+}
+
+/* SUBMIT BUTTON */
+button {
+  display: block;
+  margin: 20px auto;
+  padding: 12px 30px;
+  background: #28a745;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+button:hover {
+  transform: scale(1.05);
+}
+
+/* SCROLLBAR (OPTIONAL NICE LOOK) */
+.sidebar::-webkit-scrollbar {
+  width: 6px;
+}
+
+.sidebar::-webkit-scrollbar-thumb {
+  background: #ccc;
+  border-radius: 5px;
+}
