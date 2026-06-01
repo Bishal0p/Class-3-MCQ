@@ -1,6 +1,7 @@
 // USERS
 const students = [
     // ===== DOLPA SECTION =====
+
     { name: "Aarya Timalsina", password: "dolpa1", section: "Dolpa" },
     { name: "Aayan Dahal", password: "dolpa2", section: "Dolpa" },
     { name: "Aerik Guragai", password: "dolpa3", section: "Dolpa" },
@@ -167,8 +168,7 @@ function initExam() {
 
     if (!checkStart()) return;
 
-    selected = getRandom(allQuestions, 30);
-
+    selected = getRandom(allQuestions, 25);
     let qDiv = document.getElementById("questions");
     let nav = document.getElementById("nav"); // sidebar
 
@@ -1099,14 +1099,14 @@ function showResult() {
     qs.forEach((q, i) => {
 
         if (ans[i] === q.correct) {
-            score++;
+            score += 0.5;
             html += `<p style="color:green">${q.question} ✔</p>`;
         } else {
             html += `<p style="color:red">${q.question} ❌ Correct: ${q.correct}</p>`;
         }
     });
 
-    html += `<h3>Score: ${score}/30</h3>`;
+    html += `<h3>Score: ${score}/12.5</h3>`;
 
     document.getElementById("result").innerHTML = html;
 
@@ -1160,7 +1160,7 @@ function downloadPDF() {
 
     doc.setTextColor(0, 0, 0);
     doc.setFontSize(10);
-    doc.text(`Class: 2`, 10, y);
+    doc.text(`Class: 3`, 10, y);
     y += 5;
     doc.text(`Section: ${section}`, 10, y); // SECTION ADDED HERE
     y += 5;
@@ -1247,7 +1247,7 @@ function downloadPDF() {
 
     let score = 0;
     qs.forEach((q, i) => {
-        if (ans[i] === q.correct) score++;
+        if (ans[i] === q.correct) score += 0.5;
     });
 
     doc.setDrawColor(0);
@@ -1256,8 +1256,7 @@ function downloadPDF() {
 
     doc.setFontSize(12);
     doc.setTextColor(0, 0, 120);
-    doc.text(`FINAL SCORE: ${score} / ${qs.length}`, 10, y);
-
+    doc.text(`FINAL SCORE: ${score} / 12.5`, 10, y);
     // 🔥 EXTRA SPACE BEFORE VERIFICATION SECTION
     y += 25;
 
