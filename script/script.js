@@ -1282,7 +1282,6 @@ function downloadPDF() {
     doc.setFont(undefined, "normal");
     doc.text("Teacher: Bishal Danuwar", 10, y + 6);
     doc.text("Phone: 9863238887", 10, y + 12);
-    doc.text("Email: bbbdanuwar888@gmail.com", 10, y + 18);
 
     // ================= RIGHT SIDE (PRINCIPAL) =================
     doc.setTextColor(200, 0, 0);
