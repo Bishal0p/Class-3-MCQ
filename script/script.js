@@ -9,7 +9,7 @@ const students = [
     { name: "Arvin Adhikari", password: "dolpa5", section: "Dolpa" },
     { name: "Binamrata Sapkota", password: "dolpa6", section: "Dolpa" },
     { name: "Evan Shrestha", password: "dolpa7", section: "Dolpa" },
-    { name: "Grishika Shrestha", password: "dolpa8", section: "Dolpa" },
+    { name: "Grishika Lamsal", password: "dolpa8", section: "Dolpa" },
     { name: "Hardik Bista", password: "dolpa9", section: "Dolpa" },
     { name: "Macson Chaudhary", password: "dolpa10", section: "Dolpa" },
     { name: "Mahira Thapa Magar", password: "dolpa11", section: "Dolpa" },
@@ -64,7 +64,7 @@ const students = [
 
     // ===== GORKHA SECTION
     { name: "Aakanshya Dhakal", password: "gorkha1", section: "Gorkha" },
-    { name: "Aakanshya Lama", password: "gorkha2", section: "Gorkha" },
+    { name: "Aakankshya Lama", password: "gorkha2", section: "Gorkha" },
     { name: "Aaleesha Timalsina", password: "gorkha3", section: "Gorkha" },
     { name: "Aditi Dhakal", password: "gorkha4", section: "Gorkha" },
     { name: "Amrish Ghimire", password: "gorkha5", section: "Gorkha" },
