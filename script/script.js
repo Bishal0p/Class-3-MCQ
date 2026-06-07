@@ -37,7 +37,7 @@ const students = [
     { name: "Aayan Kandel", password: "doti2", section: "Doti" },
     { name: "Aayush Yadav", password: "doti3", section: "Doti" },
     { name: "Adity Neupane", password: "doti4", section: "Doti" },
-    { name: "Albin Piya", password: "doti5", section: "Doti" },
+    { name: "Elbin Piya", password: "doti5", section: "Doti" },
     { name: "Anish Timalsina", password: "doti6", section: "Doti" },
     { name: "Bibash Thapa", password: "doti7", section: "Doti" },
     { name: "Binisha Karki", password: "doti8", section: "Doti" },
