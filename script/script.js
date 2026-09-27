@@ -153,7 +153,7 @@ function speakMessage(message) {
 
 // ---------------- RANDOM QUESTIONS ----------------
 function getRandom(arr, n) {
-    return arr.sort(() => 0.5 - Math.random()).slice(0, n);
+    return [...arr].sort(() => 0.5 - Math.random()).slice(0, n);
 }
 
 // ---------------- EXAM INIT ----------------
@@ -169,43 +169,229 @@ function initExam() {
     if (!checkStart()) return;
 
     selected = getRandom(allQuestions, 25);
-    let qDiv = document.getElementById("questions");
-    let nav = document.getElementById("nav"); // sidebar
+
+    const qDiv = document.getElementById("questions");
+    const nav = document.getElementById("nav");
 
     qDiv.innerHTML = "";
     nav.innerHTML = "";
 
     selected.forEach((q, i) => {
 
-        // 🔥 QUESTION BLOCK WITH ID
-        let html = `<div id="q${i + 1}" class="q-box">`;
-        html += `<p>${i + 1}. ${q.question}</p>`;
+        // =====================================================
+        // QUESTION CONTAINER
+        // =====================================================
 
-        q.options.forEach(opt => {
-            html += `
-      <label>
-        <input type="radio" name="q${i}" value="${opt}"
-        onchange="saveAns(${i},'${opt}')">
-        ${opt}
-      </label><br>`;
+        const questionBox = document.createElement("div");
+        questionBox.id = "q" + (i + 1);
+        questionBox.className = "q-box";
+
+        // =====================================================
+        // QUESTION TEXT
+        // =====================================================
+
+        const questionText = document.createElement("p");
+        questionText.innerHTML = `<strong>${i + 1}. ${q.question}</strong>`;
+        questionBox.appendChild(questionText);
+
+        // =====================================================
+        // QUESTION IMAGE
+        // =====================================================
+
+        if (q.image) {
+
+            const questionImage = document.createElement("img");
+
+            questionImage.src = q.image;
+            questionImage.alt = "Question image";
+
+            questionImage.style.maxWidth = "500px";
+            questionImage.style.maxHeight = "300px";
+            questionImage.style.width = "auto";
+            questionImage.style.height = "auto";
+            questionImage.style.display = "block";
+            questionImage.style.margin = "10px auto";
+            questionImage.style.objectFit = "contain";
+            questionImage.style.borderRadius = "8px";
+
+            // If image is missing
+            questionImage.onerror = function() {
+                console.error("Question image not found:", q.image);
+                this.style.display = "none";
+            };
+
+            questionBox.appendChild(questionImage);
+        }
+
+        // =====================================================
+        // OPTIONS
+        // =====================================================
+
+        q.options.forEach((opt, optionIndex) => {
+
+            // -------------------------------------------------
+            // SUPPORT BOTH:
+            //
+            // 1. Normal option:
+            //    "Diamond"
+            //
+            // 2. Image option:
+            //    {
+            //        text: "Diamond",
+            //        image: "quiz_images/image13.png"
+            //    }
+            // -------------------------------------------------
+
+            let optionText;
+            let optionImage = null;
+
+            if (typeof opt === "object") {
+
+                optionText = opt.text || "";
+
+                if (opt.image) {
+                    optionImage = opt.image;
+                }
+
+            } else {
+
+                optionText = opt;
+            }
+
+            // -------------------------------------------------
+            // OPTION LABEL
+            // -------------------------------------------------
+
+            const label = document.createElement("label");
+
+            label.style.display = "block";
+            label.style.cursor = "pointer";
+            label.style.margin = "12px 0";
+            label.style.padding = "10px";
+            label.style.borderRadius = "8px";
+
+            // -------------------------------------------------
+            // RADIO BUTTON
+            // -------------------------------------------------
+
+            const radio = document.createElement("input");
+
+            radio.type = "radio";
+            radio.name = "q" + i;
+
+            // IMPORTANT:
+            // Store the TEXT as the value.
+            // This keeps your existing correct answers working.
+            radio.value = optionText;
+
+            radio.style.marginRight = "8px";
+
+            // -------------------------------------------------
+            // SAVE ANSWER
+            // -------------------------------------------------
+
+            radio.addEventListener("change", function() {
+
+                saveAns(i, optionText);
+
+                // Highlight selected option
+                const allLabels = questionBox.querySelectorAll("label");
+
+                allLabels.forEach(function(lbl) {
+                    lbl.style.background = "";
+                    lbl.style.border = "";
+                });
+
+                label.style.background = "#e8f0ff";
+                label.style.border = "2px solid #4285f4";
+            });
+
+            label.appendChild(radio);
+
+            // -------------------------------------------------
+            // OPTION TEXT
+            // -------------------------------------------------
+
+            const textSpan = document.createElement("span");
+
+            textSpan.textContent =
+                String.fromCharCode(65 + optionIndex) + ". " + optionText;
+
+            textSpan.style.fontSize = "16px";
+            textSpan.style.fontWeight = "500";
+
+            label.appendChild(textSpan);
+
+            // -------------------------------------------------
+            // OPTION IMAGE
+            // -------------------------------------------------
+
+            if (optionImage) {
+
+                const optionImg = document.createElement("img");
+
+                optionImg.src = optionImage;
+                optionImg.alt = optionText;
+
+                optionImg.style.display = "block";
+                optionImg.style.maxWidth = "250px";
+                optionImg.style.maxHeight = "180px";
+                optionImg.style.width = "auto";
+                optionImg.style.height = "auto";
+                optionImg.style.margin = "10px 0 5px 30px";
+                optionImg.style.objectFit = "contain";
+                optionImg.style.borderRadius = "6px";
+                optionImg.style.cursor = "pointer";
+
+                // If image doesn't exist
+                optionImg.onerror = function() {
+                    console.error(
+                        "Option image not found:",
+                        optionImage
+                    );
+
+                    this.style.display = "none";
+                };
+
+                // Clicking image selects radio button
+                optionImg.addEventListener("click", function() {
+                    radio.checked = true;
+                    radio.dispatchEvent(new Event("change"));
+                });
+
+                label.appendChild(optionImg);
+            }
+
+            questionBox.appendChild(label);
         });
 
-        html += `</div>`;
-        qDiv.innerHTML += html;
+        // =====================================================
+        // ADD QUESTION TO PAGE
+        // =====================================================
 
-        // 🔥 CREATE NAV BUTTON
-        let btn = document.createElement("button");
+        qDiv.appendChild(questionBox);
+
+        // =====================================================
+        // NAVIGATION BUTTON
+        // =====================================================
+
+        const btn = document.createElement("button");
+
         btn.innerText = i + 1;
         btn.className = "q-btn";
 
-        btn.onclick = () => {
-            document.getElementById("q" + (i + 1)).scrollIntoView({
-                behavior: "smooth"
-            });
+        btn.onclick = function() {
+
+            document.getElementById("q" + (i + 1))
+                .scrollIntoView({
+                    behavior: "smooth",
+                    block: "start"
+                });
         };
 
         nav.appendChild(btn);
     });
+
 
     // 🔥 ADD CAMERA MONITOR WITH EYE TRACKING & SOUND
     addCameraMonitorWithSound();
@@ -995,7 +1181,7 @@ function submitExam() {
 }
 
 // ---------------- RESULT TIMER ----------------
-let count = 300; // 5 minutes = 600 seconds
+let count = 10; // 5 minutes = 600 seconds
 let timerInterval = null;
 
 function startResultTimer() {
@@ -1115,10 +1301,11 @@ function showResult() {
 }
 
 // ---------------- PDF DOWNLOAD ----------------
-// ---------------- PDF DOWNLOAD ----------------
-function downloadPDF() {
+// ---------------- PDF DOWNLOAD ----------------// ---------------- PDF DOWNLOAD WITH QUESTION IMAGES ----------------
+async function downloadPDF() {
 
     const { jsPDF } = window.jspdf || {};
+
     if (!jsPDF) {
         alert("PDF library missing!");
         return;
@@ -1127,18 +1314,73 @@ function downloadPDF() {
     const qs = JSON.parse(localStorage.getItem("questions")) || [];
     const ans = JSON.parse(localStorage.getItem("answers")) || {};
     const student = localStorage.getItem("student") || "Unknown Student";
-    const section = localStorage.getItem("studentSection") || "Not Assigned"; // Get section from localStorage
+    const section = localStorage.getItem("studentSection") || "Not Assigned";
 
+    if (qs.length === 0) {
+        alert("No questions found!");
+        return;
+    }
+
+    // ---------------------------------------------------------
+    // LOAD IMAGE FUNCTION
+    // ---------------------------------------------------------
+    function loadImage(src) {
+        return new Promise((resolve, reject) => {
+
+            if (!src) {
+                resolve(null);
+                return;
+            }
+
+            const img = new Image();
+
+            img.crossOrigin = "anonymous";
+
+            img.onload = function() {
+                resolve(img);
+            };
+
+            img.onerror = function() {
+                console.error("PDF image could not be loaded:", src);
+                resolve(null);
+            };
+
+            img.src = src;
+        });
+    }
+
+    // ---------------------------------------------------------
+    // CREATE PDF
+    // ---------------------------------------------------------
     let doc = new jsPDF();
+
     let y = 15;
 
-    // ================= HEADER =================
+    // ---------------------------------------------------------
+    // HEADER
+    // ---------------------------------------------------------
     doc.setFillColor(15, 32, 39);
     doc.rect(0, 0, 210, 40, "F");
 
+    // SCHOOL LOGO
     try {
-        doc.addImage("images/schoolLogo.jpg", "PNG", 10, 6, 25, 25);
-    } catch (e) {}
+
+        const logo = await loadImage("images/schoolLogo.jpg");
+
+        if (logo) {
+            doc.addImage(
+                logo,
+                "JPEG",
+                10,
+                6,
+                25,
+                25
+            );
+        }
+
+    } catch (e) {
+        console.log("School logo could not be added:", e);
+    }
 
     doc.setTextColor(255, 255, 255);
     doc.setFontSize(15);
@@ -1152,115 +1394,377 @@ function downloadPDF() {
 
     y = 50;
 
-    // ================= STUDENT INFO WITH SECTION =================
+    // ---------------------------------------------------------
+    // STUDENT INFORMATION
+    // ---------------------------------------------------------
     doc.setTextColor(200, 0, 0);
     doc.setFontSize(12);
+
     doc.text(`Student: ${student}`, 10, y);
     y += 7;
 
     doc.setTextColor(0, 0, 0);
     doc.setFontSize(10);
-    doc.text(`Class: 3`, 10, y);
+
+    doc.text("Class: 3", 10, y);
     y += 5;
-    doc.text(`Section: ${section}`, 10, y); // SECTION ADDED HERE
+
+    doc.text(`Section: ${section}`, 10, y);
     y += 5;
-    doc.text(`Exam Type: MCQ`, 10, y);
+
+    doc.text("Exam Type: MCQ", 10, y);
     y += 5;
+
     doc.text(`Date: ${new Date().toLocaleString()}`, 10, y);
     y += 8;
 
     doc.line(10, y, 200, y);
+
     y += 8;
 
-    // ================= QUESTIONS =================
+    // ---------------------------------------------------------
+    // QUESTIONS
+    // ---------------------------------------------------------
+
     const labels = ["a)", "b)", "c)", "d)"];
 
-    qs.forEach((q, i) => {
+    for (let i = 0; i < qs.length; i++) {
 
-        if (y > 250) {
+        const q = qs[i];
+
+        // -----------------------------------------------------
+        // QUESTION HEIGHT CHECK
+        // -----------------------------------------------------
+
+        if (y > 245) {
             doc.addPage();
             y = 15;
         }
 
+        // -----------------------------------------------------
+        // QUESTION TEXT
+        // -----------------------------------------------------
+
         doc.setTextColor(0, 0, 0);
-        doc.text(`Q${i + 1}. ${q.question}`, 10, y);
-        y += 6;
+        doc.setFontSize(11);
+
+        // Split long question into multiple lines
+        const questionLines = doc.splitTextToSize(
+            `Q${i + 1}. ${q.question}`,
+            180
+        );
+
+        doc.text(questionLines, 10, y);
+
+        y += questionLines.length * 5 + 3;
+
+        // -----------------------------------------------------
+        // QUESTION IMAGE
+        // -----------------------------------------------------
+
+        if (q.image) {
+
+            console.log("Loading question image:", q.image);
+
+            const questionImg = await loadImage(q.image);
+
+            if (questionImg) {
+
+                // Original image size
+                let imgWidth = questionImg.width;
+                let imgHeight = questionImg.height;
+
+                // Maximum PDF image size
+                const maxWidth = 100;
+                const maxHeight = 65;
+
+                // Resize proportionally
+                const ratio = Math.min(
+                    maxWidth / imgWidth,
+                    maxHeight / imgHeight,
+                    1
+                );
+
+                imgWidth = imgWidth * ratio;
+                imgHeight = imgHeight * ratio;
+
+                // Check page space
+                if (y + imgHeight + 10 > 280) {
+                    doc.addPage();
+                    y = 15;
+                }
+
+                // Center image
+                const imgX = (210 - imgWidth) / 2;
+
+                try {
+
+                    doc.addImage(
+                        questionImg,
+                        "JPEG",
+                        imgX,
+                        y,
+                        imgWidth,
+                        imgHeight
+                    );
+
+                } catch (error) {
+
+                    console.error(
+                        "Could not add question image:",
+                        q.image,
+                        error
+                    );
+
+                }
+
+                y += imgHeight + 7;
+
+            } else {
+
+                console.warn(
+                    "Question image missing:",
+                    q.image
+                );
+
+                doc.setFontSize(8);
+                doc.setTextColor(150, 0, 0);
+                doc.text(
+                    "[Question image could not be loaded]",
+                    15,
+                    y
+                );
+
+                y += 5;
+
+                doc.setTextColor(0, 0, 0);
+            }
+        }
+
+        // -----------------------------------------------------
+        // OPTIONS
+        // -----------------------------------------------------
 
         const userAns = ans[i];
 
-        q.options.forEach((opt, index) => {
+        for (let index = 0; index < q.options.length; index++) {
 
-            if (y > 250) {
+            const opt = q.options[index];
+
+            // Support both:
+            // "Diamond"
+            //
+            // and:
+            // {
+            //    text: "Diamond",
+            //    image: "quiz_images/image13.png"
+            // }
+
+            let optionText = "";
+            let optionImage = null;
+
+            if (typeof opt === "object") {
+
+                optionText = opt.text || "";
+                optionImage = opt.image || null;
+
+            } else {
+
+                optionText = String(opt);
+
+            }
+
+            // -------------------------------------------------
+            // OPTION HEIGHT
+            // -------------------------------------------------
+
+            if (y > 265) {
                 doc.addPage();
                 y = 15;
             }
 
-            let isCorrect = opt === q.correct;
-            let isUser = opt === userAns;
+            // -------------------------------------------------
+            // CORRECT / WRONG STATUS
+            // -------------------------------------------------
 
-            doc.setTextColor(0, 0, 0);
+            const isCorrect = optionText === q.correct;
+            const isUser = optionText === userAns;
 
             let statusText = "";
 
-            // ================= LOGIC =================
             if (userAns === q.correct) {
 
                 if (isCorrect) {
+
                     doc.setFillColor(210, 255, 210);
                     doc.rect(10, y - 4, 180, 6, "F");
+
                     doc.setTextColor(0, 120, 0);
+
                     statusText = "OK";
                 }
 
             } else if (userAns && userAns !== q.correct) {
 
                 if (isUser) {
+
                     doc.setFillColor(255, 200, 200);
                     doc.rect(10, y - 4, 180, 6, "F");
+
                     doc.setTextColor(200, 0, 0);
+
                     statusText = "X";
+
                 } else if (isCorrect) {
+
                     doc.setFillColor(210, 255, 210);
                     doc.rect(10, y - 4, 180, 6, "F");
+
                     doc.setTextColor(0, 120, 0);
+
                     statusText = "OK";
                 }
             }
 
-            // ================= TEXT =================
-            doc.text(`${labels[index]} ${opt}`, 12, y);
+            // -------------------------------------------------
+            // OPTION TEXT
+            // -------------------------------------------------
 
-            // ================= RIGHT SIDE MARK =================
+            doc.setFontSize(10);
+
+            const optionLines = doc.splitTextToSize(
+                `${labels[index] || (index + 1) + ")"} ${optionText}`,
+                165
+            );
+
+            doc.text(
+                optionLines,
+                12,
+                y
+            );
+
+            // -------------------------------------------------
+            // RIGHT SIDE STATUS
+            // -------------------------------------------------
+
             if (statusText !== "") {
-                doc.setTextColor(statusText === "OK" ? 0 : 200, statusText === "OK" ? 120 : 0, 0);
-                doc.text(statusText, 185, y); // right side mark
+
+                if (statusText === "OK") {
+                    doc.setTextColor(0, 120, 0);
+                } else {
+                    doc.setTextColor(200, 0, 0);
+                }
+
+                doc.text(
+                    statusText,
+                    185,
+                    y
+                );
             }
 
-            y += 6;
-        });
+            y += optionLines.length * 5 + 2;
 
-        y += 3;
-    });
+            // -------------------------------------------------
+            // OPTION IMAGE
+            // -------------------------------------------------
 
-    // ================= FINAL SCORE =================
-    y += 8;
+            if (optionImage) {
+
+                const optionImg = await loadImage(optionImage);
+
+                if (optionImg) {
+
+                    let optionWidth = optionImg.width;
+                    let optionHeight = optionImg.height;
+
+                    const maxOptionWidth = 65;
+                    const maxOptionHeight = 45;
+
+                    const optionRatio = Math.min(
+                        maxOptionWidth / optionWidth,
+                        maxOptionHeight / optionHeight,
+                        1
+                    );
+
+                    optionWidth *= optionRatio;
+                    optionHeight *= optionRatio;
+
+                    // Page break if needed
+                    if (y + optionHeight + 8 > 280) {
+                        doc.addPage();
+                        y = 15;
+                    }
+
+                    try {
+
+                        doc.addImage(
+                            optionImg,
+                            "JPEG",
+                            25,
+                            y,
+                            optionWidth,
+                            optionHeight
+                        );
+
+                    } catch (error) {
+
+                        console.error(
+                            "Could not add option image:",
+                            optionImage,
+                            error
+                        );
+
+                    }
+
+                    y += optionHeight + 5;
+                }
+            }
+
+            // Reset text color
+            doc.setTextColor(0, 0, 0);
+        }
+
+        y += 5;
+    }
+
+    // ---------------------------------------------------------
+    // FINAL SCORE
+    // ---------------------------------------------------------
+
+    if (y > 250) {
+        doc.addPage();
+        y = 20;
+    }
 
     let score = 0;
+
     qs.forEach((q, i) => {
-        if (ans[i] === q.correct) score += 0.5;
+
+        if (ans[i] === q.correct) {
+            score += 0.5;
+        }
+
     });
 
     doc.setDrawColor(0);
     doc.line(10, y, 200, y);
+
     y += 10;
 
     doc.setFontSize(12);
     doc.setTextColor(0, 0, 120);
-    doc.text(`FINAL SCORE: ${score} / 12.5`, 10, y);
-    // 🔥 EXTRA SPACE BEFORE VERIFICATION SECTION
+
+    doc.text(
+        `FINAL SCORE: ${score} / 12.5`,
+        10,
+        y
+    );
+
     y += 25;
 
-    // ================= FOOTER =================
+    // ---------------------------------------------------------
+    // VERIFICATION SECTION
+    // ---------------------------------------------------------
 
     if (y > 240) {
         doc.addPage();
@@ -1269,30 +1773,68 @@ function downloadPDF() {
 
     doc.setDrawColor(0);
     doc.line(10, y, 200, y);
+
     y += 10;
 
     doc.setFontSize(10);
 
-    // ================= LEFT SIDE (TEACHER) =================
+    // LEFT - TEACHER
     doc.setTextColor(200, 0, 0);
     doc.setFont(undefined, "bold");
-    doc.text("Verified By:", 10, y);
+
+    doc.text(
+        "Verified By:",
+        10,
+        y
+    );
 
     doc.setTextColor(0, 120, 0);
     doc.setFont(undefined, "normal");
-    doc.text("Teacher: Bishal Danuwar", 10, y + 6);
-    doc.text("Phone: 9863238887", 10, y + 12);
 
-    // ================= RIGHT SIDE (PRINCIPAL) =================
+    doc.text(
+        "Teacher: Bishal Danuwar",
+        10,
+        y + 6
+    );
+
+    doc.text(
+        "Phone: 9863238887",
+        10,
+        y + 12
+    );
+
+    // RIGHT - PRINCIPAL
     doc.setTextColor(200, 0, 0);
     doc.setFont(undefined, "bold");
-    doc.text("Verified By:", 120, y);
+
+    doc.text(
+        "Verified By:",
+        120,
+        y
+    );
 
     doc.setTextColor(0, 0, 150);
     doc.setFont(undefined, "normal");
-    doc.text("Principal: Kishor Adhikari", 120, y + 6);
-    doc.text("Phone: 9851153746", 120, y + 12);
+
+    doc.text(
+        "Principal: Kishor Adhikari",
+        120,
+        y + 6
+    );
+
+    doc.text(
+        "Phone: 9851153746",
+        120,
+        y + 12
+    );
+
+    // ---------------------------------------------------------
+    // SAVE PDF
+    // ---------------------------------------------------------
 
     const safeName = student.replace(/\s+/g, "_");
-    doc.save(`${safeName}_[${section}]_MCQ_Result.pdf`); // Section added to filename
+
+    doc.save(
+        `${safeName}_[${section}]_MCQ_Result.pdf`
+    );
 }

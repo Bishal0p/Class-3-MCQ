@@ -1,256 +1,480 @@
-  const allQuestions = [
+// ============================================================
+// SECOND TERMINAL COMPUTER EXAM - CLASS 3
+// QUESTIONS.JS
+// 25 QUESTIONS
+// ============================================================
 
-      // =================Lesson:17 =================
-      {
-          question: "Where is logical reasoning used?",
-          options: [
-              "Puzzle",
-              "Chess",
-              "Sudoku",
-              "All of above"
-          ],
-          correct: "All of above"
-      },
-      {
-          question: "What comes next in the sequence: 10, 20, 30, 40, ?",
-          options: [
-              "45",
-              "50",
-              "55",
-              "60"
-          ],
-          correct: "50"
-      },
-      {
-          question: "In logical reasoning what do we do?",
-          options: [
-              "We play game",
-              "Analyze outcomes",
-              "Solve Puzzles",
-              "All of above"
-          ],
-          correct: "All of above"
-      },
-      {
-          question: "What comes next in the pattern: 5, 10, 15, ?",
-          options: [
-              "20",
-              "25",
-              "30",
-              "35"
-          ],
-          correct: "20"
-      },
-      {
-          question: "What is the last step of logical reasoning?",
-          options: [
-              "To arrive at a conclusion",
-              "Take clear steps",
-              "Taking rational steps",
-              "Change Tempo of reasoning"
-          ],
-          correct: "To arrive at a conclusion"
-      },
-      {
-          question: "If you have 8 candies and you eat 3, how many candies do you have left?",
-          options: [
-              "2",
-              "3",
-              "5",
-              "8"
-          ],
-          correct: "5"
-      },
-      {
-          question: "If today is Monday, what day will it be after two days?",
-          options: [
-              "Wednesday",
-              "Thursday",
-              "Friday",
-              "Saturday"
-          ],
-          correct: "Wednesday"
-      },
-      {
-          question: "Which direction would you turn to face North if you're currently facing West?",
-          options: [
-              "Left",
-              "Right",
-              "Forward",
-              "Backward"
-          ],
-          correct: "Right"
-      },
-      {
-          question: "Which shape does not belong in the group?",
-          options: [
-              "Circle",
-              "Square",
-              "Triangle",
-              "Rectangle"
-          ],
-          correct: "Circle"
-      },
-      {
-          question: "Which animal does not belong in the group?",
-          options: [
-              "Lion",
-              "Elephant",
-              "Giraffe",
-              "Penguin"
-          ],
-          correct: "Penguin"
-      },
+const allQuestions = [
 
-      // ================= Lesson:18 =================
-      {
-          question: "Which term best describes an algorithm?",
-          options: [
-              "A random sequence of actions",
-              "A set of instructions with a specific outcome",
-              "A complex mathematical formula",
-              "None of the above"
-          ],
-          correct: "A set of instructions with a specific outcome"
-      },
-      {
-          question: "What is the purpose of an algorithm?",
-          options: [
-              "To make tasks more confusing",
-              "To provide a general idea of what to do",
-              "To provide precise, step-by-step instructions",
-              "None of the above"
-          ],
-          correct: "To provide precise, step-by-step instructions"
-      },
-      {
-          question: "Algorithms are commonly used in which area?",
-          options: [
-              "Cooking",
-              "Everyday life",
-              "Space exploration",
-              "None of the above"
-          ],
-          correct: "Everyday life"
-      },
-      {
-          question: "An algorithm should be:",
-          options: [
-              "Vague and open to interpretation",
-              "Specific with detailed instructions",
-              "Long and concise",
-              "None of the above"
-          ],
-          correct: "Specific with detailed instructions"
-      },
-      {
-          question: "In the context of algorithms, what does 'precise' mean?",
-          options: [
-              "Very accurate",
-              "Extremely long",
-              "Complicated",
-              "None of the above"
-          ],
-          correct: "Very accurate"
-      },
-      {
-          question: "What is the main purpose of the traffic light algorithm?",
-          options: [
-              "To control the speed of vehicles",
-              "To entertain drivers",
-              "To ensure safety and regulate traffic flow",
-              "None of the above"
-          ],
-          correct: "To ensure safety and regulate traffic flow"
-      },
-      {
-          question: "Why do you need to use algorithms?",
-          options: [
-              "To take random actions",
-              "So the final result is always same",
-              "To improve handwriting",
-              "All of above"
-          ],
-          correct: "So the final result is always same"
-      },
-      {
-          question: "Which of the following activities demonstrates the use of an algorithm?",
-          options: [
-              "Solving a Rubix Cube",
-              "Solving a crossword puzzle",
-              "Following a recipe to bake a cake",
-              "None of the above"
-          ],
-          correct: "Following a recipe to bake a cake"
-      },
-      {
-          question: "An algorithm should provide a specific outcome. True or false?",
-          options: [
-              "True",
-              "False"
-          ],
-          correct: "True"
-      },
-      {
-          question: "Algorithms are used in which everyday activities?",
-          options: [
-              "Walking",
-              "Reading book",
-              "Playing with toys",
-              "None of above"
-          ],
-          correct: "Walking"
-      },
-      // Lesson:19
-      {
-          question: "What is another word for a set of instructions?",
-          options: [
-              "Rules",
-              "Directions",
-              "Algorithm",
-              "Guidelines"
-          ],
-          correct: "Algorithm"
-      },
-      {
-          question: "In logical reasoning games, what is the end goal or objective?",
-          options: [
-              "To have fun",
-              "To follow instructions",
-              "To achieve a specific outcome",
-              "To compete with others"
-          ],
-          correct: "To achieve a specific outcome"
-      },
-      {
-          question: "What is the feature of effective algorithm?",
-          options: [
-              "Using most of the steps",
-              "Using lots of texts",
-              "Writing it in a paragraph",
-              "Using fewest steps as possible"
-          ],
-          correct: "Using fewest steps as possible"
-      },
-      {
-          question: "How can you describe logical reasoning?",
-          options: [
-              "Using random steps",
-              "Following a systematic series of steps",
-              "Guessing without thinking",
-              "Choosing the first option that comes to mind"
-          ],
-          correct: "Following a systematic series of steps"
-      },
-      {
-          question: "When writing an algorithm, what should be the ultimate goal?",
-          options: [
-              "Using as many steps as possible",
-              "Making the algorithm longer",
-              "Following a complicated process",
-              "Achieving the end goal"
-          ],
-          correct: "Achieving the end goal"
-      },
+    // ========================================================
+    // QUESTION 1
+    // ========================================================
+    {
+        question: "What do you call solving a problem by following clear steps and using critical thinking?",
 
-  ];;
+        options: [
+            "Guessing randomly",
+            "Logical reasoning",
+            "Creative imagining",
+            "Unplanned decision making"
+        ],
+
+        correct: "Logical reasoning"
+    },
+
+
+    // ========================================================
+    // QUESTION 2
+    // ========================================================
+    {
+        question: "In Sudoku, can a number repeat in a row?",
+
+        image: "quiz_images/image1.jpeg",
+
+        options: [
+            "Yes , numbers can repeat many times in a row",
+            "No , each number can appear only once in a row",
+            "Sometimes , depending on the puzzle level",
+            "Only two same numbers are allowed in a row"
+        ],
+
+        correct: "No , each number can appear only once in a row"
+    },
+
+
+    // ========================================================
+    // QUESTION 3
+    // ========================================================
+    {
+        question: "When you solve a math problem using clear steps, what are you using?",
+
+        image: "quiz_images/image4.png",
+
+        options: [
+            "A number pattern",
+            "A shortcut trick",
+            "A math formula",
+            "An algorithm"
+        ],
+
+        correct: "An algorithm"
+    },
+
+
+    // ========================================================
+    // QUESTION 4
+    // ========================================================
+    {
+        question: "Every wave in the ocean goes up, then down, then up again. What is this called?",
+
+        image: "quiz_images/image6.jpeg",
+
+        options: [
+            "A mistake",
+            "A pattern",
+            "A random act",
+            "A water game"
+        ],
+
+        correct: "A pattern"
+    },
+
+
+    // ========================================================
+    // QUESTION 5
+    // ========================================================
+    {
+        question: "If a puzzle has many solutions, which solution is the best?",
+
+        options: [
+            "The one that takes the most time",
+            "The shortest and simplest solution",
+            "Any solution chosen randomly",
+            "The most difficult solution"
+        ],
+
+        correct: "The shortest and simplest solution"
+    },
+
+
+    // ========================================================
+    // QUESTION 6
+    // ========================================================
+    {
+        question: "What does a grid help you do?",
+
+        options: [
+            "Guess answers",
+            "See paths clearly",
+            "Draw only",
+            "Play randomly"
+        ],
+
+        correct: "See paths clearly"
+    },
+
+
+    // ========================================================
+    // QUESTION 7
+    // ========================================================
+    {
+        question: "What does a rectangle represent in a flowchart?",
+
+        options: [
+            "Decision",
+            "Process",
+            "Input",
+            "End"
+        ],
+
+        correct: "Process"
+    },
+
+
+    // ========================================================
+    // QUESTION 8
+    // IMAGE OPTIONS
+    // ========================================================
+    {
+        question: "Which shape shows you need to make a choice?",
+
+        options: [{
+                text: "Diamond",
+                image: "quiz_images/image13.png"
+            },
+
+            {
+                text: "Oval",
+                image: "quiz_images/image9.png"
+            },
+
+            {
+                text: "Rectangle",
+                image: "quiz_images/image17.png"
+            },
+
+            {
+                text: "Circle",
+                image: "quiz_images/image21.png"
+            }
+        ],
+
+        correct: "Diamond"
+    },
+
+
+    // ========================================================
+    // QUESTION 9
+    // ========================================================
+    {
+        question: "What is it called when a step repeats in a flowchart?",
+
+        options: [
+            "A jump",
+            "A loop",
+            "A stop",
+            "A break"
+        ],
+
+        correct: "A loop"
+    },
+
+
+    // ========================================================
+    // QUESTION 10
+    // ========================================================
+    {
+        question: "Why might you use a loop in a sandwich flowchart?",
+
+        options: [
+            "To show you are done",
+            "To make another sandwich",
+            "To list the tools you need",
+            "To draw a circle"
+        ],
+
+        correct: "To make another sandwich"
+    },
+
+
+    // ========================================================
+    // QUESTION 11
+    // ========================================================
+    {
+        question: "What is Scratch?",
+
+        image: "quiz_images/image24.png",
+
+        options: [
+            "A drawing tool",
+            "A programming language",
+            "A heavy machine",
+            "A clothing website"
+        ],
+
+        correct: "A programming language"
+    },
+
+
+    // ========================================================
+    // QUESTION 12
+    // ========================================================
+    {
+        question: 'What is the "Stage" in Scratch?',
+
+        image: "quiz_images/image25.jpeg",
+
+        options: [
+            "Where you organize your code blocks",
+            "Where characters move and act",
+            "A place to where you save your password",
+            "The exit button"
+        ],
+
+        correct: "Where characters move and act"
+    },
+
+
+    // ========================================================
+    // QUESTION 13
+    // ========================================================
+    {
+        question: 'In “Catch the crab” game, what is the crab?',
+
+        image: "quiz_images/image26.jpeg",
+
+        options: [
+            "The backdrop",
+            "The sprite",
+            "The score",
+            "The player"
+        ],
+
+        correct: "The sprite"
+    },
+
+
+    // ========================================================
+    // QUESTION 14
+    // ========================================================
+    {
+        question: "What keeps track of your points in a game?",
+
+        image: "quiz_images/image27.jpeg",
+
+        options: [
+            "A variable",
+            "A costume",
+            "A backdrop",
+            "A sound"
+        ],
+
+        correct: "A variable"
+    },
+
+
+    // ========================================================
+    // QUESTION 15
+    // ========================================================
+    {
+        question: 'Who are you playing against in this "Two Player Game"?',
+
+        image: "quiz_images/image28.png",
+
+        options: [
+            "A friend sitting next to you",
+            "Nobody, the game is just a movie",
+            "The computer controls the other paddle",
+            "You are playing against a real crab"
+        ],
+
+        correct: "The computer controls the other paddle"
+    },
+
+
+    // ========================================================
+    // QUESTION 16
+    // ========================================================
+    {
+        question: 'In Scratch, which way does "Y" block move your sprite?',
+
+        image: "quiz_images/image29.png",
+
+        options: [
+            "In a circle",
+            "Left and Right",
+            "t hides the sprite",
+            "Up and Down"
+        ],
+
+        correct: "Up and Down"
+    },
+
+
+    // ========================================================
+    // QUESTION 17
+    // ========================================================
+    {
+        question: "When you click the green flag, what will be the value of countdown??",
+
+        image: "quiz_images/image30.jpeg",
+
+        options: [
+            "10",
+            "20",
+            "0",
+            "15"
+        ],
+
+        correct: "10"
+    },
+
+
+    // ========================================================
+    // QUESTION 18
+    // ========================================================
+    {
+        question: "What is the purpose of the forever block?",
+
+        image: "quiz_images/image31.png",
+
+        options: [
+            "To stop the game",
+            "To repeat actions",
+            "To increase the score",
+            "To hit the sprite"
+        ],
+
+        correct: "To repeat actions"
+    },
+
+
+    // ========================================================
+    // QUESTION 19
+    // ========================================================
+    {
+        question: "MS Word is used to",
+
+        image: "quiz_images/image33.png",
+
+        options: [
+            "Type a text",
+            "Draw cartoons",
+            "Record a voice",
+            "Play games"
+        ],
+
+        correct: "Type a text"
+    },
+
+
+    // ========================================================
+    // QUESTION 20
+    // ========================================================
+    {
+        question: "MS Word was developed by Corporation.",
+
+        image: "quiz_images/image34.jpeg",
+
+        options: [
+            "Google",
+            "Microsoft",
+            "Apple",
+            "Intel"
+        ],
+
+        correct: "Microsoft"
+    },
+
+
+    // ========================================================
+    // QUESTION 21
+    // ========================================================
+    {
+        question: "Which feature is used to add a line or design around the edge of a page?",
+
+        image: "quiz_images/image35.jpeg",
+
+        options: [
+            "Footer",
+            "Page Border",
+            "Header",
+            "Page Layout"
+        ],
+
+        correct: "Page Border"
+    },
+
+
+    // ========================================================
+    // QUESTION 22
+    // ========================================================
+    {
+        question: "Which feature helps readers know the correct order of pages?",
+
+        options: [
+            "Page numbering",
+            "Page borders",
+            "Footer",
+            "Spell Checker"
+        ],
+
+        correct: "Page numbering"
+    },
+
+
+    // ========================================================
+    // QUESTION 23
+    // ========================================================
+    {
+        question: "Which of these tasks is best done using a table in MS Word?",
+
+        image: "quiz_images/image36.jpeg",
+
+        options: [
+            "Arranging pictures on a page",
+            "Organizing students’ names and marks",
+            "Changing the page background",
+            "Creating a bulleted list"
+        ],
+
+        correct: "Organizing students’ names and marks"
+    },
+
+
+    // ========================================================
+    // QUESTION 24
+    // ========================================================
+    {
+        question: "You just finished designing your birthday party menu using word processor. What should you do next?",
+
+        image: "quiz_images/image38.jpeg",
+
+        options: [
+            "Save and share it",
+            "Delete the file",
+            "Close without saving",
+            "Print it right away"
+        ],
+
+        correct: "Save and share it"
+    },
+
+
+    // ========================================================
+    // QUESTION 25
+    // ========================================================
+    {
+        question: "What is an acrostic poem?",
+
+        options: [
+            "A poem where every line rhymes.",
+            "A poem whose first letters spell a word.",
+            "A poem with the same number of lines.",
+            "A poem that tells a short story."
+        ],
+
+        correct: "A poem whose first letters spell a word."
+    }
+
+];
