@@ -1181,7 +1181,7 @@ function submitExam() {
 }
 
 // ---------------- RESULT TIMER ----------------
-let count = 10; // 5 minutes = 600 seconds
+let count = 300; // 5 minutes = 300 seconds
 let timerInterval = null;
 
 function startResultTimer() {
