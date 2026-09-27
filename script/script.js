@@ -1415,9 +1415,6 @@ async function downloadPDF() {
     doc.text("Exam Type: MCQ", 10, y);
     y += 5;
 
-    doc.text(`Date: ${new Date().toLocaleString()}`, 10, y);
-    y += 8;
-
     doc.line(10, y, 200, y);
 
     y += 8;
